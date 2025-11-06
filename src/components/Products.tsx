@@ -1,6 +1,7 @@
 import type { Products } from "../types/products.types";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import Card from "./Card";
 
 const Productos = () => {
   const [productos, setProductos] = useState<Products[]>([]);
@@ -18,22 +19,12 @@ const Productos = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Lista de productos</h2>
-      <div>
+    <div className="flex flex-col gap-4 px-0 align-center">
+      <h1 className="text-center text-2xl font-bold">Tienda de Productos</h1>
+      <h2 className="text-center text-lg">Lista de productos</h2>
+      <div className="grid grid-cols-4 gap-4 align-center  mx-auto px-6">
         {productos.map((p) => (
-          <div key={p.id}>
-            <img className="size-48" src={p.image} />
-
-            <h3>{p.name}</h3>
-            <p>{p.description}</p>
-            <strong>{p.price}</strong>
-            <p className="flex flex-wrap gap-2">
-              {p.categories.map((cat, p) => (
-                <span key={p}>{cat.trim()}</span>
-              ))}
-            </p>
-          </div>
+          <Card key={p.id} product={p} />
         ))}
       </div>
     </div>
